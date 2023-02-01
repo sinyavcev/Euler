@@ -2,7 +2,7 @@
 (function () {
   console.time("TIME");
 /*********************************/
-  const N = 20
+  const matrixSize = 20
   let result = 0;
   const matrix = [
     [08, 02, 22, 97, 38, 15, 00, 40, 00, 75, 04, 05, 07, 78, 52, 12, 50, 77, 91, 08],
@@ -26,16 +26,29 @@
     [20, 73, 35, 29, 78, 31, 90, 01, 74, 31, 49, 71, 48, 86, 81, 16, 23, 57, 05, 54],
     [01, 70, 54, 71, 83, 51, 54, 69, 16, 92, 33, 48, 61, 43, 52, 01, 89, 19, 67, 48]
 ]
-for (let i = 0; i < N-3; i++) {
-    for (let j = 0; j < N-3; j++) {
-        let horizontal = matrix[i][j] * matrix[i][j+1] * matrix[i][j+2] * matrix[i][j+3];
-        let vertical = matrix[j][i] * matrix[j+1][i] * matrix[j+2][i] * matrix[j+3][i];
-        let diagonal1 = matrix[i][j] * matrix[i+1][j+1] * matrix[i+2][j+2] * matrix[i+3][j+3];
-        let diagonal2 = matrix[i][N-j-1] * matrix[i+1][N-j-2] * matrix[i+2][N-j-3] * matrix[i+3][N-j-4];
-      result = Math.max(result, Math.max(horizontal, Math.max(vertical, Math.max(diagonal1, diagonal2))));
-    }
+for (let i = 0; i < matrixSize - 3; i++) {
+  for (let j = 0; j < matrixSize - 3; j++) {
+    let horizontal =
+      matrix[i][j] * matrix[i][j + 1] * matrix[i][j + 2] * matrix[i][j + 3];
+    let vertical =
+      matrix[j][i] * matrix[j + 1][i] * matrix[j + 2][i] * matrix[j + 3][i];
+    let diagonal1 =
+      matrix[i][j] *
+      matrix[i + 1][j + 1] *
+      matrix[i + 2][j + 2] *
+      matrix[i + 3][j + 3];
+    let diagonal2 =
+      matrix[i][matrixSize - j - 1] *
+      matrix[i + 1][matrixSize - j - 2] *
+      matrix[i + 2][matrixSize - j - 3] *
+      matrix[i + 3][matrixSize - j - 4];
+    result = Math.max(
+      result,
+      Math.max(horizontal, Math.max(vertical, Math.max(diagonal1, diagonal2)))
+    );
   }
+}
  /*********************************/
-  console.log(result);
+  console.log(result); //70600674
   console.timeEnd('TIME')
 }());
